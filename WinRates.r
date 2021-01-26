@@ -30,15 +30,27 @@ winRatesMap <- tabyl(esea_meta_demos3, winner_side, map)
 winRatesMap
 
 
-#Win Rates By Map
-winRatesMap <- tabyl(esea_meta_demos3, winner_side, map)
-winRatesMap 
-
-
 #Lets look at the distribution of win rates in terms of percent
 winRatesMap %>%
   adorn_percentages("col") %>%
   adorn_pct_formatting(digits = 1)
+
+
+#We can see while the win rates are close to even, there is some variation across the different maps.
+#I decided to run a two sample t-test here to analyze whether the difference in these two groups is statistically significant.
+#To get this data to a format into which this is possible requires a little data manipulation.
+
+esea_meta_demos3$CounterTerroristWin <- ifelse(esea_meta_demos3$winner_side == "CounterTerrorist", 1, 0)
+esea_meta_demos3$TerroristWin <- ifelse(esea_meta_demos3$winner_side == "Terrorist", 1, 0)
+
+
+#Now we have two new binary columns that will allow us to continue our analysis,
+#We can continue to perform our difference in means T-test
+
+
+#Ho: Mean win percentage of Counter Terrorists is 50%
+#Ha: Counter Terrorist win percentage != 50%
+t.test(esea_meta_demos3$CounterTerroristWin, mu = .50)
 
 
 
