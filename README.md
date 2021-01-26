@@ -7,4 +7,4 @@ Kaggle.com, and was collected during a two week period in August of 2018.  While
 of the insights from this analysis remain highly relevant.   
   
 ## Analysis of Win Rates
-[Win Rates Code](WinRates.r)
+[R Code for Win Rates](WinRates.r)
